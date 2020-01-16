@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import moment from 'moment';
 
-function PostCard({ post: { id, username, userImage, imageDescription, imagePath, likeCount, commentCount } }) {
+function PostCard({ post: { id, username, likeCount, commentCount } }) {
     const likePost = () => {
         console.log('Like post!')
     }
@@ -14,9 +14,9 @@ function PostCard({ post: { id, username, userImage, imageDescription, imagePath
 
     return (
         <Card fluid style={{marginBottom: '30px'}}>
-            <Image src={imagePath} wrapped ui={false} />
+            <Image src="" wrapped ui={false} />
             <Card.Content>
-                <Image src={userImage} floated='right'
+                <Image src="" floated='right'
                     size='mini' />
                 <Card.Header floated='left'>{username}</Card.Header>
                 <Card.Meta
@@ -28,7 +28,7 @@ function PostCard({ post: { id, username, userImage, imageDescription, imagePath
 
                 </Card.Meta>
                 <Card.Description>
-                    {imageDescription}
+                    Sample Description
                 </Card.Description>
             </Card.Content>
             
