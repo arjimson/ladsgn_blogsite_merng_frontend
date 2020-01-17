@@ -1,20 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Grid, Transition } from 'semantic-ui-react';
 import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+import { AuthContext } from '../../context/auth';
 
 import PostCard from './PostCard';
+import PostForm from './PostForm';
+
+import { FETCH_POSTS_QUERY } from '../../util/graphql';
 
 function Posts() {
+    const { user } = useContext(AuthContext);
 
     const { loading, data } = useQuery(FETCH_POSTS_QUERY);
     if (data) {
-        console.log(data)
-
+        console.log(data);
     }
     return (
         <Grid stackable columns={3} className="masonry grid" >
-
+            { user && (
+                <Grid.Column>
+                    <PostForm />
+                </Grid.Column>
+            )}
             {loading ? (<h1>Loading ...</h1>)
                 : (
                     <Transition.Group>
@@ -31,22 +38,5 @@ function Posts() {
     )
 }
 
-const FETCH_POSTS_QUERY = gql`
-{
-    getPosts{
-        id 
-        body 
-        createdAt 
-        username 
-        likeCount
-        likes{
-            username
-        }
-        commentCount
-        comments{
-            id username createdAt body
-        }
-    }
-}`
 
 export default Posts;
