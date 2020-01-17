@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Grid, Transition } from 'semantic-ui-react';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
@@ -8,8 +8,10 @@ import PostCard from './PostCard';
 function Posts() {
 
     const { loading, data } = useQuery(FETCH_POSTS_QUERY);
+    if (data) {
+        console.log(data)
 
-
+    }
     return (
         <Grid stackable columns={3} className="masonry grid" >
 

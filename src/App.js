@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 
 import 'semantic-ui-css/semantic.min.css';
@@ -11,18 +11,23 @@ import Signup from './pages/Signup';
 
 import MenuBar from './components/MenuBar';
 
+import { AuthProvider } from './context/auth';
+import AuthRoute from './util/AuthRoute';
 
-
+import NoUrlMatch from './pages/NoUrlMatch';
 function App() {
   return (
-    <Router>
-      <MenuBar />
-      <Container>
-        <Route exact path='/' component={Home} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/Signup' component={Signup} />
-      </Container>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <MenuBar />
+        <Container>
+          <Route exact path='/' component={Home} />
+          <AuthRoute path='/login' component={Login} />
+          <AuthRoute path='/Signup' component={Signup} />
+          <Route render={() => <Redirect to={{pathname: "/"}} />} />
+        </Container>
+      </Router>
+    </AuthProvider>
   );
 }
 
