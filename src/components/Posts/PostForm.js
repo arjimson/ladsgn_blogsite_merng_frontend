@@ -5,6 +5,7 @@ import { useMutation } from '@apollo/react-hooks';
 
 import { useForm } from '../../util/hooks';
 import { FETCH_POSTS_QUERY } from '../../util/graphql';
+
 function PostForm(props) {
     let [errors, setErrors] = useState({})
 
@@ -67,7 +68,7 @@ function PostForm(props) {
                         type="file"
                     />
 
-                    <Button type='submit' color="green">Post</Button>
+                    <Button type='submit' color="red">Post</Button>
                 </Form.Field>
             </Form>
             {Object.keys(errors).length > 0 && (

@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Card, Icon, Image, Button, Label } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/auth';
 
+import LikeButton from './LikeButton';
 import moment from 'moment';
 
-function PostCard({ post: { id, username, createdAt, likeCount, commentCount, body, postImagePath } }) {
+function PostCard({ post: { id, username, createdAt, likes, likeCount, commentCount, body, postImagePath } }) {
+    const { user } = useContext(AuthContext);
+
     const likePost = () => {
         console.log('Like post!')
-    }
-    const commentOnPost = () => {
-        console.log('Comment on post!')
     }
 
     return (
@@ -33,24 +34,29 @@ function PostCard({ post: { id, username, createdAt, likeCount, commentCount, bo
             </Card.Content>
 
             <Card.Content extra>
-                <Button as='div' labelPosition='right' onClick={likePost}>
-                    <Button color='red'>
-                        <Icon name='heart' />
-
-                    </Button>
-                    <Label as='a' basic color='red' pointing='left'>
-                        {likeCount}
-                    </Label>
-                </Button>
-                <Button as='div' labelPosition='right' onClick={commentOnPost}>
+                <LikeButton user={user} post={{ id, likes, likeCount }} />
+                <Button
+                    as={Link}
+                    to={`/post/${id}`}
+                    labelPosition='right'
+                >
                     <Button color='blue'>
                         <Icon name='comments' />
 
                     </Button>
-                    <Label as='a' basic color='blue' pointing='left'>
+                    <Label basic color='blue' pointing='left'>
                         {commentCount}
                     </Label>
                 </Button>
+
+                {user && user.username === username && (
+                    <button
+                        className="ui icon button red"
+                        onClick={() => console.log('delete post')}
+                    >
+                        <i aria-hidden="true" className="trash icon"></i>
+                    </button>
+                )}
 
             </Card.Content>
         </Card>

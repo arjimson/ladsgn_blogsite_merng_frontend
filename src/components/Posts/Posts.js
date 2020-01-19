@@ -16,9 +16,10 @@ function Posts() {
     if (data) {
         console.log(data);
     }
-    
+
     return (
-        <>
+        <div>
+           <h1 style={{textAlign: 'center'}}>Recent Posts</h1>
             <Grid stackable columns={3} className="masonry grid" >
                 {user && (
                     <Grid.Column>
@@ -38,7 +39,7 @@ function Posts() {
                     )}
 
             </Grid>
-        </>
+        </div>
     )
 }
 
