@@ -1,10 +1,10 @@
 import React from 'react';
-import { Card, Icon, Image, Button, Label  } from 'semantic-ui-react';
+import { Card, Icon, Image, Button, Label } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 import moment from 'moment';
 
-function PostCard({ post: { id, username, likeCount, commentCount } }) {
+function PostCard({ post: { id, username, likeCount, commentCount, body, postImagePath } }) {
     const likePost = () => {
         console.log('Like post!')
     }
@@ -13,10 +13,10 @@ function PostCard({ post: { id, username, likeCount, commentCount } }) {
     }
 
     return (
-        <Card fluid style={{marginBottom: '30px'}}>
+        <Card fluid style={{ marginBottom: '30px' }}>
             <Image src="" wrapped ui={false} />
             <Card.Content>
-                <Image src="" floated='right'
+                <Image src={postImagePath && `http://localhost:5000/assets/post/${postImagePath}`} floated='right'
                     size='mini' />
                 <Card.Header floated='left'>{username}</Card.Header>
                 <Card.Meta
@@ -28,15 +28,15 @@ function PostCard({ post: { id, username, likeCount, commentCount } }) {
 
                 </Card.Meta>
                 <Card.Description>
-                    Sample Description
+                    {body}
                 </Card.Description>
             </Card.Content>
-            
+
             <Card.Content extra>
                 <Button as='div' labelPosition='right' onClick={likePost}>
                     <Button color='red'>
                         <Icon name='heart' />
-                        
+
                     </Button>
                     <Label as='a' basic color='red' pointing='left'>
                         {likeCount}
@@ -45,13 +45,13 @@ function PostCard({ post: { id, username, likeCount, commentCount } }) {
                 <Button as='div' labelPosition='right' onClick={commentOnPost}>
                     <Button color='blue'>
                         <Icon name='comments' />
-                        
+
                     </Button>
                     <Label as='a' basic color='blue' pointing='left'>
                         {commentCount}
                     </Label>
                 </Button>
-        
+
             </Card.Content>
         </Card>
     )

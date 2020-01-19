@@ -6,6 +6,7 @@ import { AuthContext } from '../../context/auth';
 import PostCard from './PostCard';
 import PostForm from './PostForm';
 
+
 import { FETCH_POSTS_QUERY } from '../../util/graphql';
 
 function Posts() {
@@ -16,27 +17,28 @@ function Posts() {
         console.log(data);
     }
     return (
-        <Grid stackable columns={3} className="masonry grid" >
-            { user && (
-                <Grid.Column>
-                    <PostForm />
-                </Grid.Column>
-            )}
-            {loading ? (<h1>Loading ...</h1>)
-                : (
-                    <Transition.Group>
-                        {data.getPosts &&
-                            data.getPosts.map((post) => (
-                                <Grid.Column key={post.id}>
-                                    <PostCard post={post} />
-                                </Grid.Column>
-                            ))}
-                    </Transition.Group>
+        <>
+            <Grid stackable columns={3} className="masonry grid" >
+                {user && (
+                    <Grid.Column>
+                        <PostForm />
+                    </Grid.Column>
                 )}
+                {loading ? (<h1>Loading ...</h1>)
+                    : (
+                        <Transition.Group>
+                            {data.getPosts &&
+                                data.getPosts.map((post) => (
+                                    <Grid.Column key={post.id}>
+                                        <PostCard post={post} />
+                                    </Grid.Column>
+                                ))}
+                        </Transition.Group>
+                    )}
 
-        </Grid>
+            </Grid>
+        </>
     )
 }
-
 
 export default Posts;
