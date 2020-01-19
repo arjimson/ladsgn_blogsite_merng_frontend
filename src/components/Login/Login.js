@@ -32,7 +32,7 @@ function Login(props) {
 
     return (
         <div className="form-container">
-            <Form className="form-container" onSubmit={onSubmit}>
+            <Form className="form-container" onSubmit={onSubmit} className={loading ? "loading" : ''}>
                 <h1>Login</h1>
                 <Form.Input
                     label="Username"
@@ -41,6 +41,7 @@ function Login(props) {
                     value={values.username}
                     onChange={onChange}
                     type="text"
+                    error={errors.username ? true : false}
                 />
                 <Form.Input
                     label="Password"
@@ -49,6 +50,7 @@ function Login(props) {
                     value={values.password}
                     onChange={onChange}
                     type="password"
+                    error={errors.password ? true : false}
                 />
                 <Form.Field>
                     <Checkbox label='I agree to the Terms and Conditions' />

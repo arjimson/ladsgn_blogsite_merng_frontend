@@ -6,16 +6,17 @@ import { AuthContext } from '../../context/auth';
 import PostCard from './PostCard';
 import PostForm from './PostForm';
 
-
 import { FETCH_POSTS_QUERY } from '../../util/graphql';
 
 function Posts() {
     const { user } = useContext(AuthContext);
 
     const { loading, data } = useQuery(FETCH_POSTS_QUERY);
+
     if (data) {
         console.log(data);
     }
+    
     return (
         <>
             <Grid stackable columns={3} className="masonry grid" >

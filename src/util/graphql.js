@@ -6,15 +6,20 @@ export const FETCH_POSTS_QUERY = gql`
         id 
         body 
         createdAt 
-        postImagePath
         username 
+        postImagePath
+        likes {
+            id 
+            username 
+            createdAt
+        }
         likeCount
-        likes{
-            username
+        comments {
+            id 
+            body 
+            username 
+            createdAt
         }
         commentCount
-        comments{
-            id username createdAt body
-        }
     }
 }`

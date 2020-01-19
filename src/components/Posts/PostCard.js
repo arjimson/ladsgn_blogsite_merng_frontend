@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import moment from 'moment';
 
-function PostCard({ post: { id, username, likeCount, commentCount, body, postImagePath } }) {
+function PostCard({ post: { id, username, createdAt, likeCount, commentCount, body, postImagePath } }) {
     const likePost = () => {
         console.log('Like post!')
     }
@@ -23,8 +23,8 @@ function PostCard({ post: { id, username, likeCount, commentCount, body, postIma
                     as={Link}
                     to={`/posts/${id}`}
                 >
-                    {/* <span className='date'>{moment().fromNow()}</span> */}
-                    <span className='date'>2 days ago</span>
+                    <span className='date'>{moment(createdAt).fromNow(true)}</span>
+                    {/* <span className='date'>2 days ago</span> */}
 
                 </Card.Meta>
                 <Card.Description>

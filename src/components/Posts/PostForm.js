@@ -6,11 +6,10 @@ import { useMutation } from '@apollo/react-hooks';
 import { useForm } from '../../util/hooks';
 import { FETCH_POSTS_QUERY } from '../../util/graphql';
 function PostForm(props) {
-    const [errors, setErrors] = useState({})
+    let [errors, setErrors] = useState({})
 
-    const { values, onChange, onSubmit } = useForm(createPostCallback, {
-        body: '',
-        postImagePath: ''
+    let { values, onChange, onSubmit } = useForm(createPostCallback, {
+        body: ''
     });
 
     const [imagePost, setImagePost] = useState('');
@@ -23,28 +22,18 @@ function PostForm(props) {
     }) => validity.valid && setImagePost(file);
 
 
-    const [createPost, { loading }] = useMutation(CREATE_POST_MUTATION, {
+    let [createPost, { loading }] = useMutation(CREATE_POST_MUTATION, {
         variables: {
             body: values.body,
-            postImagePath: values.postImagePath,
             file: imagePost
         },
-        update(proxy, result) {
-            const data = proxy.readQuery({
-                query: FETCH_POSTS_QUERY
-            })
-            data.getPosts = [result.data.createPost, ...data.getPosts];
-            proxy.writeQuery({
-                query: FETCH_POSTS_QUERY, data
-            })
-            console.log(result)
+        refetchQueries: [{ query: FETCH_POSTS_QUERY }],
+        update() {
             values.body = '';
-            values.postImagePath = '';
-            imagePost = '';
+            document.getElementById('imagePost').value = '';
             setErrors({});
         },
         onError(err) {
-            console.log(err.graphQLErrors[0].extensions.exception.errors)
             setErrors(err.graphQLErrors[0].extensions.exception.errors)
         }
     });
@@ -52,6 +41,8 @@ function PostForm(props) {
     function createPostCallback() {
         createPost();
     }
+
+    console.log(values.body, 'body');
 
 
     return (
@@ -69,13 +60,14 @@ function PostForm(props) {
                     />
                     <Form.Input
                         placeholder="Enter description.."
-                        name="postImagePath"
+                        name="imagePost"
+                        id="imagePost"
                         onChange={selectImageOnChange}
-                        error={errors.postImagePath ? true : false}
+                        error={errors.file ? true : false}
                         type="file"
                     />
 
-                    <Button type='submit'>Add post</Button>
+                    <Button type='submit' color="green">Post</Button>
                 </Form.Field>
             </Form>
             {Object.keys(errors).length > 0 && (
@@ -92,15 +84,24 @@ function PostForm(props) {
 }
 
 const CREATE_POST_MUTATION = gql`
-mutation createPost($body: String!, $postImagePath: String!, $file: Upload!){
-    createPost(body: $body, postImagePath: $postImagePath, file: $file) {
-        id body createdAt username postImagePath
+mutation createPost($body: String!, $file: Upload!){
+    createPost(body: $body, file: $file) {
+        id 
+        body 
+        createdAt 
+        username 
+        postImagePath
         likes {
-            id username createdAt
+            id 
+            username 
+            createdAt
         }
         likeCount
         comments {
-            id body username createdAt
+            id 
+            body 
+            username 
+            createdAt
         }
         commentCount
     }
