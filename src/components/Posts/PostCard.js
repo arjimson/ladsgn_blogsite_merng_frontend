@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/auth';
 
 import LikeButton from './LikeButton';
+import DeleteButton from './DeleteButton';
 import moment from 'moment';
 
 function PostCard({ post: { id, username, createdAt, likes, likeCount, commentCount, body, postImagePath } }) {
@@ -17,7 +18,7 @@ function PostCard({ post: { id, username, createdAt, likes, likeCount, commentCo
         <Card fluid style={{ marginBottom: '30px' }}>
             <Image src="" wrapped ui={false} />
             <Card.Content>
-                <Image src={postImagePath && `http://localhost:5000/assets/post/${postImagePath}`} floated='right'
+                <Image src={postImagePath && `http://morning-garden-61714.herokuapp.com/assets/post/${postImagePath}`} floated='right'
                     size='mini' />
                 <Card.Header floated='left'>{username}</Card.Header>
                 <Card.Meta
@@ -50,12 +51,7 @@ function PostCard({ post: { id, username, createdAt, likes, likeCount, commentCo
                 </Button>
 
                 {user && user.username === username && (
-                    <button
-                        className="ui icon button red"
-                        onClick={() => console.log('delete post')}
-                    >
-                        <i aria-hidden="true" className="trash icon"></i>
-                    </button>
+                    <DeleteButton postId={id}/>
                 )}
 
             </Card.Content>
