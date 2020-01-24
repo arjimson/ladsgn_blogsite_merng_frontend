@@ -18,6 +18,8 @@ function Signup(props) {
         confirmPassword: ''
     })
 
+
+
     const [addUser, { loading }] = useMutation(REGISTER_USER, {
         update(_, { data: { register: userData } }) {
             context.login(userData);

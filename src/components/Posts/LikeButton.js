@@ -11,7 +11,6 @@ function LikeButton({ user, post: { id, likes, likeCount } }) {
     useEffect(() => {
         if (user && likes.find(like => like.username === user.username)) {
             setLiked(true)
-            console.log(user)
         } else setLiked(false)
     }, [user, likes])
 

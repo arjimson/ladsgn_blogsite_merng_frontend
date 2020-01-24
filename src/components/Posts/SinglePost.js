@@ -24,54 +24,72 @@ function SinglePost(props) {
         postMarkup = <p>Loading..</p>;
     } else {
         const { getPost } = data;
-        const { id, body, createdAt, username, comments, likes, likeCount, commentCount } = getPost;
-        console.log(getPost);
-        postMarkup = <React.Fragment><Grid>
-            <Grid.Row>
-                <Grid.Column width={2}>
-                    <Image
-                        src="htpps://react/semantic-ui.com/images/avatar/large/molly.png"
-                        size="small"
-                        float="right" />
-                </Grid.Column>
-                <Grid.Column width={10}>
-                    <Card fluid>
-                        <Card.Content>
-                            <Card.Header>
-                                {username}
-                            </Card.Header>
-                            <Card.Description>
-                                {body}
-                            </Card.Description>
-                            <Card.Meta>
-                                {moment(createdAt).fromNow()}
-                            </Card.Meta>
-                        </Card.Content>
-                        <hr />
-                        <Card.Content extra>
-                            <LikeButton user={user} post={{ id, likeCount, likes }} />
-                            <Button
-                                as="div"
-                                labelPosition="right"
-                                onClick={() => console.log('Comment on post')}
-                            >
+        const { id, body, createdAt, username, comments, likes, likeCount, postImagePath, commentCount } = getPost;
+
+        postMarkup = <React.Fragment>
+            <Grid>
+                <Grid.Row>
+                    <Grid.Column>
+                        <Card fluid>
+                            <Image
+                                src={postImagePath && `http://morning-garden-61714.herokuapp.com/assets/post/${postImagePath}`}
+                            />
+                            <Card.Content>
+                                <Card.Header>
+                                    {username}
+                                </Card.Header>
+                                <Card.Description>
+                                    {body}
+                                </Card.Description>
+                                <Card.Meta>
+                                    {moment(createdAt).fromNow()}
+                                </Card.Meta>
+                            </Card.Content>
+                            <hr />
+                            <Card.Content extra>
+                                <LikeButton user={user} post={{ id, likeCount, likes }} />
                                 <Button
-                                    basic
-                                    color="blue"
+                                    as="div"
+                                    labelPosition="right"
+                                    onClick={() => console.log('Comment on post')}
                                 >
-                                    <Icon name="comments"
-                                    />
-                                    <Label basic color="blue" pointing="left">{commentCount}</Label>
+                                    <Button
+                                        basic
+                                        color="blue"
+                                    >
+                                        <Icon name="comments"
+                                        />
+                                    </Button>
+                                    <Label basic color='blue' pointing='left'>
+                                        {commentCount}
+                                    </Label>
                                 </Button>
-                            </Button>
-                            {user && user.username === username && (
-                                <DeleteButton postId={id} />
-                            )}
-                        </Card.Content>
-                    </Card>
-                </Grid.Column>
-            </Grid.Row>
-        </Grid></React.Fragment>;
+                                {user && user.username === username && (
+                                    <DeleteButton postId={id} {...props}/>
+                                )}
+                            </Card.Content>
+                        </Card>
+                        { comments.map((comment) => (
+                            <Card fluid key={comment.id}>
+                                <Card.Content>
+                                    { user && user.username === comment.username && (
+                                        <DeleteButton postId={id} commentId={comment.id}/>
+                                    )}
+                                    <Card.Header>
+                                        {comment.username}
+                                    </Card.Header>
+                                    <Card.Meta>
+                                        {moment(comment.createdAt).fromNow()}
+                                    </Card.Meta>
+                                    <Card.body>
+                                        {comment.body}
+                                    </Card.body>
+                                </Card.Content>
+                            </Card>
+                        ))}
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid></React.Fragment>;
 
     }
 
@@ -86,6 +104,7 @@ query($postId: ID!) {
         createdAt
         username
         likeCount
+        postImagePath
         likes {
             username
         }

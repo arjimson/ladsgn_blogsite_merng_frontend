@@ -10,17 +10,18 @@ import { FETCH_POSTS_QUERY } from '../../util/graphql';
 
 function Posts() {
     const { user } = useContext(AuthContext);
-
     const { loading, data } = useQuery(FETCH_POSTS_QUERY);
 
-    if (data) {
-        console.log(data);
-    }
+    // if (data) {
+    //     console.log(data);
+    // }
+
+    console.log(user)
 
     return (
         <div>
            <h1 style={{textAlign: 'center'}}>Recent Posts</h1>
-            <Grid stackable columns={3} className="masonry grid" >
+            <Grid stackable columns={3} className="masonry" >
                 {user && (
                     <Grid.Column>
                         <PostForm />

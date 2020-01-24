@@ -30,7 +30,19 @@ function PostForm(props) {
             file: imagePost
         },
         refetchQueries: [{ query: FETCH_POSTS_QUERY }],
-        update() {
+        update(proxy, result) {
+            // const data = proxy.readQuery({
+            //     query: FETCH_POSTS_QUERY
+            // })
+
+            // data.getPosts = [...data.getPosts, result.data.createPost];
+
+            // proxy.writeQuery({ query: FETCH_POSTS_QUERY, data })
+
+            // console.log(data.getPosts, 'data.getPosts');
+            // console.log(result, 'result');
+
+            // console.log(data, 'data');
             values.body = '';
             document.getElementById('imagePost').value = '';
             setErrors({});
@@ -43,9 +55,6 @@ function PostForm(props) {
     function createPostCallback() {
         createPost();
     }
-
-    console.log(values.body, 'body');
-
 
     return (
         <>

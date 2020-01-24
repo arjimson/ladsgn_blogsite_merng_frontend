@@ -8,23 +8,25 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import { setContext } from 'apollo-link-context';
 
 
-const httpLink = createUploadLink({
+const uploadLink = createUploadLink({
     uri: 'https://morning-garden-61714.herokuapp.com/graphql'
 })
 
-const authLink = setContext(() => {
+const authLink = setContext((_, { headers }) => {
     const token = localStorage.getItem('jwtToken');
     return {
         headers: {
+            ...headers,
             Authorization: token ? `Bearer ${token}` : ''
         }
     }
 })
 
 const client = new ApolloClient({
-    link: authLink.concat(httpLink),
+    link: authLink.concat(uploadLink),
     cache: new InMemoryCache()
 })
+
 
 export default (
     <ApolloProvider client={client}>
