@@ -29,20 +29,14 @@ function PostForm(props) {
             body: values.body,
             file: imagePost
         },
-        refetchQueries: [{ query: FETCH_POSTS_QUERY }],
         update(proxy, result) {
-            // const data = proxy.readQuery({
-            //     query: FETCH_POSTS_QUERY
-            // })
-
-            // data.getPosts = [...data.getPosts, result.data.createPost];
-
-            // proxy.writeQuery({ query: FETCH_POSTS_QUERY, data })
-
-            // console.log(data.getPosts, 'data.getPosts');
-            // console.log(result, 'result');
-
-            // console.log(data, 'data');
+            const data = proxy.readQuery({
+                query: FETCH_POSTS_QUERY
+            });
+            proxy.writeQuery({
+                query: FETCH_POSTS_QUERY,
+                data: { getPosts: [...data.getPosts, result.data.createPost] }
+            });
             values.body = '';
             document.getElementById('imagePost').value = '';
             setErrors({});
