@@ -11,6 +11,7 @@ import DeleteButton from './DeleteButton';
 
 function SinglePost(props) {
 
+ 
     const postId = props.match.params.postId;
     const { user } = useContext(AuthContext);
     const [comment, setComment] = useState('');
@@ -39,16 +40,18 @@ function SinglePost(props) {
     } else {
         const { getPost } = data;
         const { id, body, createdAt, username, comments, likes, likeCount, postImagePath, commentCount } = getPost;
-        console.log(comments, ' comments')
+
+        const sections = {
+            singlePost: [{
+                key: 'home', content: 'home', link: true
+            }, {
+                key: 'about us', content: 'home', link: true
+            }]
+        }
+    
 
         postMarkup = <React.Fragment>
-            <Breadcrumb>
-                <Breadcrumb.Section link>Home</Breadcrumb.Section>
-                <Breadcrumb.Divider />
-                <Breadcrumb.Section link>Store</Breadcrumb.Section>
-                <Breadcrumb.Divider />
-                <Breadcrumb.Section active>T-Shirt</Breadcrumb.Section>
-            </Breadcrumb>
+            <Breadcrumb icon='right angle' sections={sections.singlePost} />
             <Grid >
                 <Grid.Row>
                     <Grid.Column>
