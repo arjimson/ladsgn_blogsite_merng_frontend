@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { Card, Grid, Image, Form, Button, Icon, Label, Breadcrumb } from 'semantic-ui-react';
+import { Card, Grid, Image, Form, Button, Icon, Label, Breadcrumb, Segment } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import moment from 'moment';
@@ -11,7 +12,7 @@ import DeleteButton from './DeleteButton';
 
 function SinglePost(props) {
 
- 
+
     const postId = props.match.params.postId;
     const { user } = useContext(AuthContext);
     const [comment, setComment] = useState('');
@@ -41,21 +42,28 @@ function SinglePost(props) {
         const { getPost } = data;
         const { id, body, createdAt, username, comments, likes, likeCount, postImagePath, commentCount } = getPost;
 
-        const sections = {
-            singlePost: [{
-                key: 'home', content: 'home', link: true
-            }, {
-                key: 'about us', content: 'home', link: true
-            }]
-        }
-    
+
 
         postMarkup = <React.Fragment>
-            <Breadcrumb icon='right angle' sections={sections.singlePost} />
+
             <Grid >
                 <Grid.Row>
+                    <Grid.Column className="py-0 mt-2" >
+                        <Breadcrumb>
+                            <Button
+                                color="red"
+                                icon
+                                size="tiny"
+                                as={Link}
+                                to="/">
+                                <Icon name='close' color="arrow left" />
+                            </Button>
+                        </Breadcrumb>
+                    </Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
                     <Grid.Column>
-                        <Card fluid className="singlepost-container">
+                        <Card fluid>
                             <Image
                                 src={postImagePath && `http://morning-garden-61714.herokuapp.com/assets/post/${postImagePath}`}
                             />

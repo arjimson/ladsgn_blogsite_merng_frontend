@@ -23,8 +23,9 @@
     left: 0;
     bottom: 0;
     right: 0;
-    position: absolute;  
+    position: fixed;  
     z-index: -1;
+
 }
 
 .form-container.login, .form-container.signup, .posts-container, .singlepost-container{
@@ -43,4 +44,22 @@
     width: 11em !important;
 }
 
+.py-0{
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
 
+.mt-2 {
+    margin-top: 20px !important;
+}
+
+.mt-5 {
+    margin-top: 50px !important;
+}
+
+
+.postcard-image {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 150px;
+}

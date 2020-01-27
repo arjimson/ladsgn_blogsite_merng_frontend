@@ -20,9 +20,10 @@ function DeleteButton({ history, postId, commentId, callback }) {
                     query: FETCH_POSTS_QUERY,
                     data: { getPosts: data.getPosts.filter((post) => post.id !== postId) }
                 });
+                history.push('/');
             }
             if(callback) callback();
-            // history.push('/');
+       
         },
         variables: {
             postId,

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form } from 'semantic-ui-react';
+import { Button, Form, Card } from 'semantic-ui-react';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 
@@ -21,7 +21,7 @@ function PostForm(props) {
             files: [file]
         }
     }) => validity.valid && setImagePost(file);
-    
+
     let [createPost, { loading }] = useMutation(CREATE_POST_MUTATION, {
         variables: {
             body: values.body,
@@ -49,40 +49,42 @@ function PostForm(props) {
     }
 
     return (
-        <>
-            <Form onSubmit={onSubmit} noValidate className={loading ? "loading" : ''}>
-                <h1>Create a post:</h1>
-                <Form.Field>
-                    <Form.Input
-                        placeholder="Enter description.."
-                        name="body"
-                        onChange={onChange}
-                        value={values.body}
-                        error={errors.body ? true : false}
-                        type="text"
-                    />
-                    <Form.Input
-                        placeholder="Enter description.."
-                        name="imagePost"
-                        id="imagePost"
-                        onChange={selectImageOnChange}
-                        error={errors.file ? true : false}
-                        type="file"
-                    />
+        <Card fluid>
+            <Card.Content>
+                <Form onSubmit={onSubmit} noValidate className={loading ? "loading" : ''}>
+                    <h1>Create a post:</h1>
+                    <Form.Field>
+                        <Form.Input
+                            placeholder="Enter description.."
+                            name="body"
+                            onChange={onChange}
+                            value={values.body}
+                            error={errors.body ? true : false}
+                            type="text"
+                        />
+                        <Form.Input
+                            placeholder="Enter description.."
+                            name="imagePost"
+                            id="imagePost"
+                            onChange={selectImageOnChange}
+                            error={errors.file ? true : false}
+                            type="file"
+                        />
+                        <Button type='submit' color="red">Post</Button>
+                    </Form.Field>
+                </Form>
+                {Object.keys(errors).length > 0 && (
+                    <div className="ui error message">
+                        <ul className="list">
+                            {Object.values(errors).map(value => (
+                                <li key={value}>{value}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+            </Card.Content>
 
-                    <Button type='submit' color="red">Post</Button>
-                </Form.Field>
-            </Form>
-            {Object.keys(errors).length > 0 && (
-                <div className="ui error message">
-                    <ul className="list">
-                        {Object.values(errors).map(value => (
-                            <li key={value}>{value}</li>
-                        ))}
-                    </ul>
-                </div>
-            )}
-        </>
+        </Card>
     )
 }
 

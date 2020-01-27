@@ -1,8 +1,6 @@
 import React, { useContext, useState } from 'react';
-
-import { Button, Dropdown, Menu } from 'semantic-ui-react';
+import { Button, Menu, Input } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-
 import { AuthContext } from '../../context/auth';
 function MenuBar() {
     const { user, logout } = useContext(AuthContext);
@@ -25,6 +23,9 @@ function MenuBar() {
             </Menu.Item>
 
             <Menu.Menu position='right'>
+                <Menu.Item>
+                    <Input icon='search' placeholder='Search...' />
+                </Menu.Item>
                 <Menu.Item
                     name={user.username}
                     active
@@ -56,6 +57,9 @@ function MenuBar() {
         </Menu.Item>
 
         <Menu.Menu position='right'>
+            <Menu.Item>
+                <Input icon='search' placeholder='Search...' />
+            </Menu.Item>
             <Menu.Item>
                 <Button
                     primary
