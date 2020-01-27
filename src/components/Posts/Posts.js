@@ -12,12 +12,6 @@ function Posts() {
     const { user } = useContext(AuthContext);
     const { loading, data } = useQuery(FETCH_POSTS_QUERY);
 
-    // if (data) {
-    //     console.log(data);
-    // }
-
-    console.log(user)
-
     return (
         <div className="posts-container">
            <h1 style={{textAlign: 'center'}}>Recent Posts</h1>

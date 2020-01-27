@@ -21,9 +21,7 @@ function PostForm(props) {
             files: [file]
         }
     }) => validity.valid && setImagePost(file);
-
-    console.log(imagePost)
-
+    
     let [createPost, { loading }] = useMutation(CREATE_POST_MUTATION, {
         variables: {
             body: values.body,

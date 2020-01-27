@@ -24,7 +24,6 @@ function DeleteButton({ history, postId, commentId, callback }) {
             if(callback) callback();
             // history.push('/');
         },
-        refetchQueries: [{ query: FETCH_POSTS_QUERY }],
         variables: {
             postId,
             commentId
