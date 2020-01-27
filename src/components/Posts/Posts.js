@@ -19,7 +19,7 @@ function Posts() {
     console.log(user)
 
     return (
-        <div>
+        <div className="posts-container">
            <h1 style={{textAlign: 'center'}}>Recent Posts</h1>
             <Grid stackable columns={3} className="masonry" >
                 {user && (

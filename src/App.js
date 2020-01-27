@@ -19,13 +19,18 @@ function App() {
     <AuthProvider>
       <Router>
         <MenuBar />
-        <Container>
-          <Route exact path='/' component={Home} />
-          <AuthRoute path='/login' component={Login} />
-          <AuthRoute path='/Signup' component={Signup} />
-          <Route exact path='/posts/:postId' component={SinglePost} />
-          <Route render={() => <Redirect to={{pathname: "/"}} />} />
+        <Container className="homepage-container" fluid>
+
+
+          <Container>
+            <Route exact path='/' component={Home} />
+            <AuthRoute path='/login' component={Login} />
+            <AuthRoute path='/Signup' component={Signup} />
+            <Route exact path='/posts/:postId' component={SinglePost} />
+            <Route render={() => <Redirect to={{ pathname: "/" }} />} />
+          </Container>
         </Container>
+
       </Router>
     </AuthProvider>
   );

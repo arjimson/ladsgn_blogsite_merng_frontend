@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Card, Grid, Image, Form, Button, Icon, Label } from 'semantic-ui-react';
+import { Card, Grid, Image, Form, Button, Icon, Label, Breadcrumb } from 'semantic-ui-react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import moment from 'moment';
@@ -42,10 +42,17 @@ function SinglePost(props) {
         console.log(comments, ' comments')
 
         postMarkup = <React.Fragment>
-            <Grid>
+            <Breadcrumb>
+                <Breadcrumb.Section link>Home</Breadcrumb.Section>
+                <Breadcrumb.Divider />
+                <Breadcrumb.Section link>Store</Breadcrumb.Section>
+                <Breadcrumb.Divider />
+                <Breadcrumb.Section active>T-Shirt</Breadcrumb.Section>
+            </Breadcrumb>
+            <Grid >
                 <Grid.Row>
                     <Grid.Column>
-                        <Card fluid>
+                        <Card fluid className="singlepost-container">
                             <Image
                                 src={postImagePath && `http://morning-garden-61714.herokuapp.com/assets/post/${postImagePath}`}
                             />
@@ -109,7 +116,7 @@ function SinglePost(props) {
                         )}
                         {comments.map((comment) => (
                             <Card fluid key={comment.id}>
-                              
+
                                 <Card.Content>
                                     {user && user.username === comment.username && (
                                         <DeleteButton postId={id} commentId={comment.id} />

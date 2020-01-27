@@ -5,6 +5,42 @@
 
 .form-container {
     width: 400px;
-    margin: auto
+    margin: auto;
+    position: relative;
+    z-index: 1;
 }
+
+.menubar-container {
+    margin: 0!important;
+}
+
+.homepage-container::after {
+    content: "";
+    background-image: url('./assets/homepage.png');
+    background-size: cover;
+    opacity: 0.3;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;  
+    z-index: -1;
+}
+
+.form-container.login, .form-container.signup, .posts-container, .singlepost-container{
+    margin-top: 20px !important;
+}
+
+.text-ladsgn-color-red {
+    color: #F01E28 !important;
+}
+
+.button-ladsgn-color-red {
+    background-color: #F01E28 !important;
+}
+
+.logo-ladsgn {
+    width: 11em !important;
+}
+
 

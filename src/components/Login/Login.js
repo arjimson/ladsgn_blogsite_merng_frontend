@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Button, Checkbox, Form } from 'semantic-ui-react';
+import { Button, Checkbox, Form, Card, Header } from 'semantic-ui-react';
 
 import { AuthContext } from '../../context/auth';
 import { useMutation } from '@apollo/react-hooks';
@@ -31,41 +31,47 @@ function Login(props) {
     }
 
     return (
-        <div className="form-container">
-            <Form className="form-container" onSubmit={onSubmit} className={loading ? "loading" : ''}>
-                <h1>Login</h1>
-                <Form.Input
-                    label="Username"
-                    placeholder="Username..."
-                    name="username"
-                    value={values.username}
-                    onChange={onChange}
-                    type="text"
-                    error={errors.username ? true : false}
-                />
-                <Form.Input
-                    label="Password"
-                    placeholder="Password..."
-                    name="password"
-                    value={values.password}
-                    onChange={onChange}
-                    type="password"
-                    error={errors.password ? true : false}
-                />
-                <Form.Field>
-                    <Checkbox label='I agree to the Terms and Conditions' />
-                </Form.Field>
-                <Button type='submit'>Submit</Button>
-            </Form>
-            {Object.keys(errors).length > 0 && (
-                <div className="ui error message">
-                    <ul className="list">
-                        {Object.values(errors).map(value => (
-                            <li key={value}>{value}</li>
-                        ))}
-                    </ul>
-                </div>
-            )}
+        <div className="form-container login">
+            <Card>
+                <Card.Content>
+                    <Form className={`form-container ${loading ? "loading" : ''}`} onSubmit={onSubmit}>
+                        <Header size='huge' className="text-ladsgn-color-red">Login</Header>
+                        <Form.Input
+                            label="Username"
+                            placeholder="Username..."
+                            name="username"
+                            value={values.username}
+                            onChange={onChange}
+                            type="text"
+                            error={errors.username ? true : false}
+                        />
+                        <Form.Input
+                            label="Password"
+                            placeholder="Password..."
+                            name="password"
+                            value={values.password}
+                            onChange={onChange}
+                            type="password"
+                            error={errors.password ? true : false}
+                        />
+                        <Form.Field>
+                            <Checkbox label='I agree to the Terms and Conditions' />
+                        </Form.Field>
+                        <Button type='submit' color="red" className="button-ladsgn-color-red">Submit</Button>
+                    </Form>
+                    {Object.keys(errors).length > 0 && (
+                        <div className="ui error message">
+                            <ul className="list">
+                                {Object.values(errors).map(value => (
+                                    <li key={value}>{value}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </Card.Content>
+
+            </Card>
+
         </div>
     )
 }

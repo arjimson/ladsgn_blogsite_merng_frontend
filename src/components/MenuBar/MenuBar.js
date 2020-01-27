@@ -15,56 +15,53 @@ function MenuBar() {
     const handleItemClick = (e, { name }) => setActiveItem(name);
 
     const menuBar = user ? (
-        <Menu stackable size='tiny'>
+        <Menu stackable size='large' className="menubar-container">
             <Menu.Item
                 name={user.username}
                 active
                 as={Link}
-                to="/"
-            />
+                to="/" >
+                <img src={require('../../assets/logo.png')} className="logo-ladsgn" />
+            </Menu.Item>
 
             <Menu.Menu position='right'>
-                <Dropdown item text='Language'>
-                    <Dropdown.Menu>
-                        <Dropdown.Item>English</Dropdown.Item>
-                        <Dropdown.Item>Russian</Dropdown.Item>
-                        <Dropdown.Item>Spanish</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
-
+                <Menu.Item
+                    name={user.username}
+                    active
+                    as={Link}
+                    to="/"
+                />
                 <Menu.Item>
                     <Button
-                        primary
                         name='logout'
+                        color='red'
+                        className='button-ladsgn-color-red'
                         onClick={logout}
                     >Logout</Button>
                 </Menu.Item>
-
             </Menu.Menu>
         </Menu>
 
-    ) : (<Menu stackable size='tiny'>
+    ) : (<Menu stackable size='large' className="menubar-container">
+
+
         <Menu.Item
             name='home'
-            active={activeItem === 'home'}
+            // active={activeItem === 'home'}
             onClick={handleItemClick}
             as={Link}
             to="/"
-        />
+        >
+            <img src={require('../../assets/logo.png')} className="logo-ladsgn" />
+        </Menu.Item>
 
         <Menu.Menu position='right'>
-            <Dropdown item text='Language'>
-                <Dropdown.Menu>
-                    <Dropdown.Item>English</Dropdown.Item>
-                    <Dropdown.Item>Russian</Dropdown.Item>
-                    <Dropdown.Item>Spanish</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
-
             <Menu.Item>
                 <Button
                     primary
                     name='login'
+                    color='red'
+                    className='button-ladsgn-color-red'
                     active={activeItem === 'login'}
                     onClick={handleItemClick}
                     as={Link}
@@ -76,6 +73,8 @@ function MenuBar() {
                 <Button
                     primary
                     name='signup'
+                    color='red'
+                    className='button-ladsgn-color-red'
                     active={activeItem === 'signup'}
                     onClick={handleItemClick}
                     as={Link}
