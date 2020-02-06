@@ -9,7 +9,7 @@ import { setContext } from 'apollo-link-context';
 
 
 const uploadLink = createUploadLink({
-    uri: 'https://morning-garden-61714.herokuapp.com/graphql'
+    uri: 'https://ladbrokes-ladsgn-testenv.herokuapp.com/graphql'
 })
 
 const authLink = setContext((_, { headers }) => {

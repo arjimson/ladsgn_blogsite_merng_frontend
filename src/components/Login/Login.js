@@ -32,7 +32,7 @@ function Login(props) {
 
     return (
         <div className="form-container login">
-            <Card>
+            <Card fluid>
                 <Card.Content>
                     <Form className={`form-container ${loading ? "loading" : ''}`} onSubmit={onSubmit}>
                         <Header size='huge' className="text-ladsgn-color-red">Login</Header>

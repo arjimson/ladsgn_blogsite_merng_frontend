@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Card, Grid, Image, Form, Button, Icon, Label, Breadcrumb, Segment } from 'semantic-ui-react';
+import { Card, Grid, Image, Form, Button, Icon, Label, Breadcrumb, Container } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
@@ -45,108 +45,110 @@ function SinglePost(props) {
 
 
         postMarkup = <React.Fragment>
-
-            <Grid >
-                <Grid.Row>
-                    <Grid.Column className="py-0 mt-2" >
-                        <Breadcrumb>
-                            <Button
-                                color="red"
-                                icon
-                                size="tiny"
-                                as={Link}
-                                to="/">
-                                <Icon name='close' color="arrow left" />
-                            </Button>
-                        </Breadcrumb>
-                    </Grid.Column>
-                </Grid.Row>
-                <Grid.Row>
-                    <Grid.Column>
-                        <Card fluid>
-                            <Image
-                                src={postImagePath && `http://morning-garden-61714.herokuapp.com/assets/post/${postImagePath}`}
-                            />
-                            <Card.Content>
-                                <Card.Header>
-                                    {username}
-                                </Card.Header>
-                                <Card.Description>
-                                    {body}
-                                </Card.Description>
-                                <Card.Meta>
-                                    {moment(createdAt).fromNow()}
-                                </Card.Meta>
-                            </Card.Content>
-                            <hr />
-                            <Card.Content extra>
-                                <LikeButton user={user} post={{ id, likeCount, likes }} />
+            <Container>
+                <Grid >
+                    <Grid.Row>
+                        <Grid.Column className="py-0 mt-2" >
+                            <Breadcrumb>
                                 <Button
-                                    as="div"
-                                    labelPosition="right"
-                                    onClick={() => console.log('Comment on post')}
-                                >
-                                    <Button
-                                        basic
-                                        color="blue"
-                                    >
-                                        <Icon name="comments"
-                                        />
-                                    </Button>
-                                    <Label basic color='blue' pointing='left'>
-                                        {commentCount}
-                                    </Label>
+                                    color="red"
+                                    icon
+                                    size="tiny"
+                                    as={Link}
+                                    to="/">
+                                    <Icon name='close' color="arrow left" />
                                 </Button>
-                                {user && user.username === username && (
-                                    <DeleteButton postId={id} {...props} />
-                                )}
-                            </Card.Content>
-                        </Card>
-                        {user && (
+                            </Breadcrumb>
+                        </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row>
+                        <Grid.Column>
                             <Card fluid>
+                                <Image
+                                    src={postImagePath && `https://ladbrokes-ladsgn-testenv.herokuapp.com/assets/post/${postImagePath}`}
+                                />
                                 <Card.Content>
-                                    <p>Post a comment:</p>
-                                    <Form>
-                                        <div className="ui action input fluid">
-                                            <input
-                                                type="text"
-                                                placeholder="Comment.."
-                                                name="comment"
-                                                value={comment}
-                                                onChange={(e) => setComment(e.target.value)}
+                                    <Card.Header>
+                                        {username}
+                                    </Card.Header>
+                                    <Card.Description>
+                                        {body}
+                                    </Card.Description>
+                                    <Card.Meta>
+                                        {moment(createdAt).fromNow()}
+                                    </Card.Meta>
+                                </Card.Content>
+                                <hr />
+                                <Card.Content extra>
+                                    <LikeButton user={user} post={{ id, likeCount, likes }} />
+                                    <Button
+                                        as="div"
+                                        labelPosition="right"
+                                        onClick={() => console.log('Comment on post')}
+                                    >
+                                        <Button
+                                            basic
+                                            color="blue"
+                                        >
+                                            <Icon name="comments"
                                             />
-                                            <button type="submit" className="ui button teal" disabled={comment.trim() === ''}
-                                                onClick={submitComment}>
-                                                Submit
+                                        </Button>
+                                        <Label basic color='blue' pointing='left'>
+                                            {commentCount}
+                                        </Label>
+                                    </Button>
+                                    {user && user.username === username && (
+                                        <DeleteButton postId={id} {...props} />
+                                    )}
+                                </Card.Content>
+                            </Card>
+                            {user && (
+                                <Card fluid>
+                                    <Card.Content>
+                                        <p>Post a comment:</p>
+                                        <Form>
+                                            <div className="ui action input fluid">
+                                                <input
+                                                    type="text"
+                                                    placeholder="Comment.."
+                                                    name="comment"
+                                                    value={comment}
+                                                    onChange={(e) => setComment(e.target.value)}
+                                                />
+                                                <button type="submit" className="ui button teal" disabled={comment.trim() === ''}
+                                                    onClick={submitComment}>
+                                                    Submit
                                         </button>
 
-                                        </div>
-                                    </Form>
-                                </Card.Content>
-                            </Card>
-                        )}
-                        {comments.map((comment) => (
-                            <Card fluid key={comment.id}>
+                                            </div>
+                                        </Form>
+                                    </Card.Content>
+                                </Card>
+                            )}
+                            {comments.map((comment) => (
+                                <Card fluid key={comment.id}>
 
-                                <Card.Content>
-                                    {user && user.username === comment.username && (
-                                        <DeleteButton postId={id} commentId={comment.id} />
-                                    )}
-                                    <Card.Header>
-                                        {comment.username}
-                                    </Card.Header>
-                                    <Card.Meta>
-                                        {moment(comment.createdAt).fromNow()}
-                                    </Card.Meta>
-                                    <Card.Description>
-                                        {comment.body}
-                                    </Card.Description>
-                                </Card.Content>
-                            </Card>
-                        ))}
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid></React.Fragment>;
+                                    <Card.Content>
+                                        {user && user.username === comment.username && (
+                                            <DeleteButton postId={id} commentId={comment.id} />
+                                        )}
+                                        <Card.Header>
+                                            {comment.username}
+                                        </Card.Header>
+                                        <Card.Meta>
+                                            {moment(comment.createdAt).fromNow()}
+                                        </Card.Meta>
+                                        <Card.Description>
+                                            {comment.body}
+                                        </Card.Description>
+                                    </Card.Content>
+                                </Card>
+                            ))}
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
+            </Container>
+        </React.Fragment>;
 
     }
 

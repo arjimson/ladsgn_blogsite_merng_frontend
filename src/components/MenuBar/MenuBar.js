@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Button, Menu, Input } from 'semantic-ui-react';
+import { Button, Menu, Input, Header } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/auth';
 function MenuBar() {
@@ -16,7 +16,6 @@ function MenuBar() {
         <Menu stackable size='large' className="menubar-container">
             <Menu.Item
                 name={user.username}
-                active
                 as={Link}
                 to="/" >
                 <img src={require('../../assets/logo.png')} className="logo-ladsgn" />
@@ -24,14 +23,15 @@ function MenuBar() {
 
             <Menu.Menu position='right'>
                 <Menu.Item>
-                    <Input icon='search' placeholder='Search...' />
+                    <Input icon='search' placeholder='Search...' className="input-search-ladsgn" />
                 </Menu.Item>
                 <Menu.Item
                     name={user.username}
-                    active
                     as={Link}
                     to="/"
-                />
+                >
+                    <Header as='h4' color="red">{user.username}</Header>
+                </Menu.Item>
                 <Menu.Item>
                     <Button
                         name='logout'
@@ -58,7 +58,7 @@ function MenuBar() {
 
         <Menu.Menu position='right'>
             <Menu.Item>
-                <Input icon='search' placeholder='Search...' />
+                <Input icon='search' placeholder='Search...' className="input-search-ladsgn" />
             </Menu.Item>
             <Menu.Item>
                 <Button

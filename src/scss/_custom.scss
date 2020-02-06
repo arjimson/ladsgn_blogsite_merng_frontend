@@ -1,0 +1,121 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow: hidden;
+}
+
+.page-title {
+    display: block !important;
+    text-align: center;
+}
+
+.form-container {
+    width: 400px;
+    margin: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.homepage-container{
+    // border: 1px solid red;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    &:after {
+        content: "";
+        background-image: url('../assets/homepage.png');
+        background-repeat: no-repeat;
+        background-size: 100%;
+        opacity: .9;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        position: absolute;
+        right: 0; 
+        z-index: -2;
+    }
+    // &:before {
+    //     height: 100vh;
+    //     background: rgb(255,255,255);
+    //     background: linear-gradient(0deg, rgba(255,255,255,0) 50%, rgba(247,247,247,1) 100%);
+    // }
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: -0px;
+        z-index: -1;
+        background: linear-gradient(0deg, rgba(255,255,255,0) 50%, rgba(247,247,247,1) 100%);
+        background-size: 100%;
+    }
+}
+
+.menubar-container {
+    z-index: 3;
+}
+
+.form-container.login, .form-container.signup, .singlepost-container{
+    margin-top: 50px !important;
+}
+
+.banner-container{
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    // border: 1px solid green;
+}
+
+.posts-container {
+    padding-top: 50px;
+    // border: 1px solid black;
+    position: relative;
+    height: 100vh;
+}
+
+.text-ladsgn-color-red {
+    color: #F01E28 !important;
+}
+
+.button-ladsgn-color-red {
+    background-color: #F01E28 !important;
+}
+
+.logo-ladsgn {
+    width: 11em !important;
+}
+
+.py-0{
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.mt-2 {
+    margin-top: 20px !important;
+}
+
+.mt-5 {
+    margin-top: 50px !important;
+}
+
+.postcard-image {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 150px;
+}
+
+.caret-down-ladsgn {
+    position: absolute;
+    left: 30%;
+    bottom: 0;
+}
+
+.caret-up-ladsgn {
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+}

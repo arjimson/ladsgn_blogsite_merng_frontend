@@ -38,7 +38,7 @@ function Signup(props) {
 
     return (
         <div className="form-container signup">
-            <Card>
+            <Card fluid>
                 <Card.Content>
                     <Form onSubmit={onSubmit} noValidate className={loading ? "loading" : ''}>
                         <Header size='huge' className="text-ladsgn-color-red">Signup</Header>

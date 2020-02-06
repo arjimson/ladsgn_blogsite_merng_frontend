@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { Button, Card, Grid, Image, Icon, Label } from 'semantic-ui-react';
+import { Button, Card, Grid, Image, Icon, Label, Container } from 'semantic-ui-react';
 
 import moment from 'moment';
 
@@ -62,7 +62,7 @@ function SinglePost(props) {
                                     </Label>
                                 </Button>
                                 {user && user.username === username && (
-                                    <DeleteButton postId={id} callback={deletePostCallback}/>
+                                    <DeleteButton postId={id} callback={deletePostCallback} />
                                 )}
                             </Card.Content>
                         </Card>

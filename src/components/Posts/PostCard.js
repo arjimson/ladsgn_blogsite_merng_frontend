@@ -12,12 +12,12 @@ import moment from 'moment';
 function PostCard({ post: { id, username, createdAt, likes, likeCount, commentCount, body, postImagePath } }) {
     const { user } = useContext(AuthContext);
 
-    const postImage = `http://morning-garden-61714.herokuapp.com/assets/post/${postImagePath}`
+    const postImage = `https://ladbrokes-ladsgn-testenv.herokuapp.com/assets/post/${postImagePath}`
 
     return (
         <>
-            <Card fluid >
-                <img className="postcard-image" style={{ backgroundImage: `url(${postImage})`}}/>
+            <Card fluid>
+                <Image src={postImage} wrapped ui={false} />
                 <Card.Content>
                     <Card.Header floated='left'>{username}</Card.Header>
                     <Card.Meta
