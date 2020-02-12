@@ -35,8 +35,10 @@ function PostModal({ postId, modal, handleModalClose }) {
         postMarkup = <p>Loading..</p>;
     } else {
         const { getPost } = data;
-        const { id, likes, likeCount, postImagePath, username, comments, commentCount } = getPost;
+        const { id, likes, body, likeCount, postImagePath, username, comments, commentCount } = getPost;
         const image = `https://ladbrokes-ladsgn-testenv.herokuapp.com/assets/post/${postImagePath}`;
+
+        const postBody = <p>{body}</p>;
         let postComments;
 
         if (comments.length > 0) {
@@ -58,7 +60,7 @@ function PostModal({ postId, modal, handleModalClose }) {
         postMarkup = <Modal.Content>
             <Grid stackable columns={2}>
                 <Grid.Column>
-                    <Image src={image} centered/>
+                    <Image src={image} centered />
                 </Grid.Column>
                 <Grid.Column>
                     <h2>What is Lorem Ipsum?</h2>
@@ -71,10 +73,10 @@ function PostModal({ postId, modal, handleModalClose }) {
                         {username}
                     </Grid.Row>
                     <Grid.Row>
-                        <LikeButton user={user} post={{ id, likes, likeCount }} />
+                        {postBody}
                     </Grid.Row>
                     <Grid.Row>
-                        {/* {postBody} */}
+                        <LikeButton user={user} post={{ id, likes, likeCount }} />
                     </Grid.Row>
                     <Comment.Group>
                         <Header as='h3' dividing>
