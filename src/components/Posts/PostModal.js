@@ -88,7 +88,7 @@ function PostModal({ postId, modal, handleModalClose }) {
                         <div style={{ overflow: 'auto', maxHeight: 200 }}>
                             {postComments}
                         </div>
-                        <Form reply>
+                        {user && <Form reply>
                             <Form.TextArea
                                 placeholder="Comment.."
                                 name="comment"
@@ -101,7 +101,7 @@ function PostModal({ postId, modal, handleModalClose }) {
                                 primary
                                 disabled={comment.trim() === ''}
                                 onClick={() => submitComment()} />
-                        </Form>
+                        </Form>}
                     </Comment.Group>
                 </Grid.Column>
             </Grid>
