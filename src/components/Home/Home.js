@@ -34,7 +34,7 @@ function Home() {
 
             <div ref={postSection} className="posts-container">
                 <div
-                    style={{ overflow: 'auto', maxHeight: '90vh' }} >
+                    style={{ overflow: 'auto', maxHeight: '90vh', padding: '5px' }} >
 
                     <Posts />
                 </div>
