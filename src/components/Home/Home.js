@@ -33,7 +33,13 @@ function Home() {
             </div>
 
             <div ref={postSection} className="posts-container">
-                <Posts />
+                <div
+                    style={{ overflow: 'auto', maxHeight: '90vh' }} >
+
+                    <Posts />
+                </div>
+
+
                 <div className="caret-up-ladsgn">
                     <img
                         onClick={goToHomepageSection}
