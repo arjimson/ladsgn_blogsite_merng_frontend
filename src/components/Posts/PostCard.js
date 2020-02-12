@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Card, Icon, Image, Button, Label } from 'semantic-ui-react';
+import { Card, Icon, Image, Button, Label, Grid } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/auth';
 
@@ -15,7 +15,7 @@ function PostCard({ post: { id, username, createdAt, likes, likeCount, commentCo
     const handlePostClicked = (id) => postClicked(id);
 
     return (
-        <>
+        <Grid.Column>
             <Card fluid>
                 <Image src={postImage} wrapped ui={false} />
                 <Card.Content>
@@ -39,7 +39,7 @@ function PostCard({ post: { id, username, createdAt, likes, likeCount, commentCo
                     <LikeButton user={user} post={{ id, likes, likeCount }} />
                     <Button
                         as={Link}
-                        to={`/posts/${id}`}
+                        onClick={() => handlePostClicked(id)}
                         labelPosition='right'
                     >
                         <Button color='blue'>
@@ -55,7 +55,7 @@ function PostCard({ post: { id, username, createdAt, likes, likeCount, commentCo
                     )}
                 </Card.Content>
             </Card>
-        </>
+        </Grid.Column>
     )
 }
 

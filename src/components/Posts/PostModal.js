@@ -5,15 +5,28 @@ import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import { useQuery } from '@apollo/react-hooks';
 
+import LikeButton from './LikeButton';
 import { AuthContext } from '../../context/auth';
 
 function PostModal({ postId, modal, handleModalClose }) {
 
     const [comment, setComment] = useState('');
 
+    const { user } = useContext(AuthContext);
+
     const { data } = useQuery(FETCH_POST_QUERY, {
         variables: {
             postId
+        }
+    })
+
+    const [submitComment] = useMutation(SUBMIT_COMMENT_MUTATION, {
+        update() {
+            setComment('')
+        },
+        variables: {
+            postId,
+            body: comment
         }
     })
 
@@ -22,9 +35,10 @@ function PostModal({ postId, modal, handleModalClose }) {
         postMarkup = <p>Loading..</p>;
     } else {
         const { getPost } = data;
-        const { postImagePath, username, comments, commentCount } = getPost;
+        const { id, likes, likeCount, postImagePath, username, comments, commentCount } = getPost;
         const image = `https://ladbrokes-ladsgn-testenv.herokuapp.com/assets/post/${postImagePath}`;
         let postComments;
+
         if (comments.length > 0) {
             postComments = comments.map(comment =>
                 <Comment>
@@ -44,7 +58,7 @@ function PostModal({ postId, modal, handleModalClose }) {
         postMarkup = <Modal.Content>
             <Grid stackable columns={2}>
                 <Grid.Column>
-                    <Image src={image} />
+                    <Image src={image} centered/>
                 </Grid.Column>
                 <Grid.Column>
                     <h2>What is Lorem Ipsum?</h2>
@@ -55,6 +69,9 @@ function PostModal({ postId, modal, handleModalClose }) {
                             src='https://react.semantic-ui.com/images/avatar/small/matt.jpg'
                         />
                         {username}
+                    </Grid.Row>
+                    <Grid.Row>
+                        <LikeButton user={user} post={{ id, likes, likeCount }} />
                     </Grid.Row>
                     <Grid.Row>
                         {/* {postBody} */}
@@ -76,7 +93,7 @@ function PostModal({ postId, modal, handleModalClose }) {
                                 value={comment}
                                 onChange={(e) => setComment(e.target.value)} />
                             <Button
-                                content='Add Reply'
+                                content='Add Comment'
                                 labelPosition='left'
                                 icon='edit'
                                 primary
@@ -85,22 +102,12 @@ function PostModal({ postId, modal, handleModalClose }) {
                         </Form>
                     </Comment.Group>
                 </Grid.Column>
-
-
             </Grid>
         </Modal.Content>
 
     }
 
-    const [submitComment] = useMutation(SUBMIT_COMMENT_MUTATION, {
-        update() {
-            setComment('')
-        },
-        variables: {
-            postId,
-            body: comment
-        }
-    })
+
 
     return (
         <>

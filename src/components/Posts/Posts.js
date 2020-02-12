@@ -30,34 +30,24 @@ function Posts() {
 
 
 
-    return loading ? 
-    <PageLoader /> 
-    : 
-    <Container>
-        <Grid stackable columns={3} className="masonry" >
-            {user && (
-                <Grid.Column>
+    return loading ?
+        <PageLoader />
+        :
+        <Container>
+            <div class="ui three column doubling stackable masonry grid">
+                {user &&
                     <PostForm />
-                    <PostModal modal={modal} handleModalClose={handleModalClose} postId={postId} />
-                </Grid.Column>
-            )}
-            {loading ? (<h1>Loading ...</h1>)
-                : (
-                    <Transition.Group>
-                        {data.getPosts &&
-                            data.getPosts.map((post) => (
-                                <Grid.Column key={post.id}>
-                                    <PostCard post={post} postClicked={postClicked}/>
-                                </Grid.Column>
-                            ))}
-                    </Transition.Group>
-                )}
-
-        </Grid>
-    </Container>
-
-
-
+                }
+                {loading ? (<h1>Loading ...</h1>)
+                    : (
+                        data.getPosts &&
+                        data.getPosts.map((post) => (
+                            <PostCard post={post} postClicked={postClicked} />
+                        ))
+                    )}
+            </div>
+            <PostModal modal={modal} handleModalClose={handleModalClose} postId={postId} />
+        </Container>
 }
 
 export default Posts;
