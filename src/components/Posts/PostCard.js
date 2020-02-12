@@ -7,22 +7,27 @@ import LikeButton from './LikeButton';
 import DeleteButton from './DeleteButton';
 import moment from 'moment';
 
-
-
-function PostCard({ post: { id, username, createdAt, likes, likeCount, commentCount, body, postImagePath } }) {
+function PostCard({ post: { id, username, createdAt, likes, likeCount, commentCount, body, postImagePath }, postClicked }) {
     const { user } = useContext(AuthContext);
 
     const postImage = `https://ladbrokes-ladsgn-testenv.herokuapp.com/assets/post/${postImagePath}`
+
+    const handlePostClicked = (id) => postClicked(id);
 
     return (
         <>
             <Card fluid>
                 <Image src={postImage} wrapped ui={false} />
                 <Card.Content>
+                    <Image
+                        floated='right'
+                        size='mini'
+                        src='https://react.semantic-ui.com/images/avatar/small/matt.jpg'
+                    />
                     <Card.Header floated='left'>{username}</Card.Header>
                     <Card.Meta
                         as={Link}
-                        to={`/posts/${id}`}
+                        onClick={() => handlePostClicked(id)}
                     >
                         <span className='date'>{moment(createdAt).fromNow(true)}</span>
                     </Card.Meta>
