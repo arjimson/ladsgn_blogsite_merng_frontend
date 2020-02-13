@@ -10,8 +10,11 @@ function PostForm(props) {
     let [errors, setErrors] = useState({})
 
     let { values, onChange, onSubmit } = useForm(createPostCallback, {
+        title: '',
         body: ''
     });
+
+    console.log(values)
 
     const [imagePost, setImagePost] = useState('');
 
@@ -24,6 +27,7 @@ function PostForm(props) {
 
     let [createPost, { loading }] = useMutation(CREATE_POST_MUTATION, {
         variables: {
+            title: values.title,
             body: values.body,
             file: imagePost
         },
@@ -40,6 +44,7 @@ function PostForm(props) {
             setErrors({});
         },
         onError(err) {
+            console.log(err)
             setErrors(err.graphQLErrors[0].extensions.exception.errors)
         }
     });
@@ -55,6 +60,14 @@ function PostForm(props) {
                     <Form onSubmit={onSubmit} noValidate className={loading ? "loading" : ''}>
                         <h1>Create a post:</h1>
                         <Form.Field>
+                            <Form.Input
+                                placeholder="Enter title.."
+                                name="title"
+                                onChange={onChange}
+                                value={values.title}
+                                error={errors.title ? true : false}
+                                type="text"
+                            />
                             <Form.Input
                                 placeholder="Enter description.."
                                 name="body"
@@ -91,9 +104,10 @@ function PostForm(props) {
 }
 
 const CREATE_POST_MUTATION = gql`
-mutation createPost($body: String!, $file: Upload!){
-    createPost(body: $body, file: $file) {
+mutation createPost($title: String!, $body: String!, $file: Upload!){
+    createPost(title: $title, body: $body, file: $file) {
         id 
+        title
         body 
         createdAt 
         username 

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Card, Icon, Image, Button, Label, Grid } from 'semantic-ui-react';
+import { Card, Icon, Image, Button, Label, Grid, Header } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/auth';
 
@@ -7,24 +7,32 @@ import LikeButton from './LikeButton';
 import DeleteButton from './DeleteButton';
 import moment from 'moment';
 
-function PostCard({ post: { id, username, createdAt, likes, likeCount, commentCount, body, postImagePath }, postClicked }) {
+function PostCard({ post: { id, title, username, createdAt, likes, likeCount, commentCount, body, postImagePath }, postClicked }) {
     const { user } = useContext(AuthContext);
 
-    const postImage = `https://ladbrokes-ladsgn-testenv.herokuapp.com/assets/post/${postImagePath}`
+    const postImage = `http://localhost:5000/assets/post/${postImagePath}`
 
     const handlePostClicked = (id) => postClicked(id);
 
     return (
         <Grid.Column>
             <Card fluid>
-                <Image src={postImage} wrapped ui={false} />
+                <Image
+                    onClick={() => handlePostClicked(id)}
+                    src={postImage} wrapped ui={false} />
                 <Card.Content>
                     <Image
+
                         floated='right'
                         size='mini'
                         src='https://react.semantic-ui.com/images/avatar/small/matt.jpg'
                     />
-                    <Card.Header floated='left'>{username}</Card.Header>
+                    <Card.Header floated='left' className="text-ladsgn-color-red">{title}</Card.Header>
+
+                    <Card.Meta>
+                        <span className='date'>{username}</span>
+                    </Card.Meta>
+
                     <Card.Meta
                         as={Link}
                         onClick={() => handlePostClicked(id)}
