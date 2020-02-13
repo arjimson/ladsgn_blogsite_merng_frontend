@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect} from 'react';
 import Posts from '../Posts';
 
 
@@ -8,11 +8,16 @@ function Home() {
     let postSection = React.createRef();
     let homepageSection = React.createRef();
 
+    useEffect(() =>{
+        window.addEventListener('scroll', handleScroll);
+    })
+
+    function handleScroll() {
+        let scrollTop = window.scrollY;
+        console.log(scrollTop)
+    }
+
     function goToPostSection() {
-        // postSection.current.scrollIntoView({
-        //     behavior: "smooth",
-        //     block: "nearest"
-        // })
         window.scrollTo(0, postSection.current.offsetTop)
     }
     function goToHomepageSection() {
@@ -35,11 +40,8 @@ function Home() {
             <div ref={postSection} className="posts-container">
                 <div
                     style={{overflowY: 'scroll', height: '90vh', padding: '5px', overflowX: 'hidden'}}>
-
                     <Posts />
                 </div>
-
-
                 <div className="caret-up-ladsgn">
                     <img
                         onClick={goToHomepageSection}

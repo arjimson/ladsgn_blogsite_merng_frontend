@@ -116,8 +116,13 @@ body {
 
 .caret-up-ladsgn {
     position: absolute;
+    z-index: 5;
     left: 0;
     bottom: -10px;
+
+    img {
+        width: 70%;
+    }
 }
 
 body {
