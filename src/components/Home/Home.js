@@ -39,7 +39,7 @@ function Home() {
 
             <div ref={postSection} className="posts-container">
                 <div
-                    style={{overflowY: 'scroll', height: '90vh', padding: '5px', overflowX: 'hidden'}}>
+                    style={{overflowY: 'scroll', height: '90vh', padding: '10px', overflowX: 'hidden'}}>
                     <Posts />
                 </div>
                 <div className="caret-up-ladsgn">
