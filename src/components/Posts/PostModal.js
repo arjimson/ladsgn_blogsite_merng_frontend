@@ -36,7 +36,7 @@ function PostModal({ postId, modal, handleModalClose }) {
     } else {
         const { getPost } = data;
         const { id, likes, body, likeCount, postImagePath, username, comments, commentCount } = getPost;
-        const image = `http://localhost:5000/assets/post/${postImagePath}`;
+        const image = `https://ladbrokes-ladsgn-testenv.herokuapp.com/assets/post/${postImagePath}`;
 
         const postBody = <p>{body}</p>;
         let postComments;

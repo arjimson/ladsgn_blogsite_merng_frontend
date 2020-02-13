@@ -10,7 +10,7 @@ import moment from 'moment';
 function PostCard({ post: { id, title, username, createdAt, likes, likeCount, commentCount, body, postImagePath }, postClicked }) {
     const { user } = useContext(AuthContext);
 
-    const postImage = `http://localhost:5000/assets/post/${postImagePath}`
+    const postImage = `https://ladbrokes-ladsgn-testenv.herokuapp.com/assets/post/${postImagePath}`
 
     const handlePostClicked = (id) => postClicked(id);
 
@@ -18,8 +18,10 @@ function PostCard({ post: { id, title, username, createdAt, likes, likeCount, co
         <Grid.Column>
             <Card fluid>
                 <Image
+                    as={Link}
                     onClick={() => handlePostClicked(id)}
-                    src={postImage} wrapped ui={false} />
+                    src={postImage} wrapped ui={false}
+                    className="post-image" />
                 <Card.Content>
                     <Image
 
@@ -27,15 +29,18 @@ function PostCard({ post: { id, title, username, createdAt, likes, likeCount, co
                         size='mini'
                         src='https://react.semantic-ui.com/images/avatar/small/matt.jpg'
                     />
-                    <Card.Header floated='left' className="text-ladsgn-color-red">{title}</Card.Header>
-
+                    <Card.Header
+                        floated='left'
+                        className="text-ladsgn-color-red post-title"
+                        as={Link}
+                        onClick={() => handlePostClicked(id)}>
+                        {title}
+                    </Card.Header>
                     <Card.Meta>
                         <span className='date'>{username}</span>
                     </Card.Meta>
-
                     <Card.Meta
-                        as={Link}
-                        onClick={() => handlePostClicked(id)}
+
                     >
                         <span className='date'>{moment(createdAt).fromNow(true)}</span>
                     </Card.Meta>

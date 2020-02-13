@@ -29,7 +29,7 @@ body {
         background-image: url('../assets/homepage.png');
         background-repeat: no-repeat;
         background-size: 100%;
-        opacity: .9;
+        opacity: .95;
         top: 0;
         left: 0;
         bottom: 0;
@@ -37,11 +37,7 @@ body {
         right: 0; 
         z-index: -2;
     }
-    // &:before {
-    //     height: 100vh;
-    //     background: rgb(255,255,255);
-    //     background: linear-gradient(0deg, rgba(255,255,255,0) 50%, rgba(247,247,247,1) 100%);
-    // }
+  
     &:before {
         content: '';
         position: absolute;
@@ -75,6 +71,30 @@ body {
     // border: 1px solid black;
     position: relative;
     height: 100vh;
+
+    .ui.grid>.column:not(.row) {
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+    }
+
+    .ui.grid>.column:not(.row), .ui.grid>.row>.column {
+      
+        padding-left: .5rem;
+        padding-right: .5rem;
+
+    }
+
+    .post-image {
+        &:hover {
+            opacity: .90;
+        }
+    }
+    .post-title {
+        &:hover {
+            opacity: .75;
+        }
+    }
+
 }
 
 .text-ladsgn-color-red {
